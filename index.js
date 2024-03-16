@@ -4,6 +4,7 @@ const serverless = require("serverless-http");
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const characters = [
   {
@@ -39,11 +40,8 @@ app.get("/api/characters", (req, res) => {
 });
 
 app.get("/api/character", (req, res) => {
-  const character = characters.find((c) => c.id === +req.params.id);
+  const character = characters.find((c) => c.id === +req.query.id);
   res.json(character);
 });
 
 module.exports.handler = serverless(app);
-
-const character = characters.find((c) => c.id === +2);
-console.log(character)
