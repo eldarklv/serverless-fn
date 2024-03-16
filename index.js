@@ -38,9 +38,12 @@ app.get("/api/characters", (req, res) => {
   res.json(characters);
 });
 
-app.get("/api/characters/:id", (req, res) => {
+app.get("/api/character", (req, res) => {
   const character = characters.find((c) => c.id === +req.params.id);
   res.json(character);
 });
 
 module.exports.handler = serverless(app);
+
+const character = characters.find((c) => c.id === +2);
+console.log(character)
